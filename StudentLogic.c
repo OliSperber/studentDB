@@ -26,7 +26,7 @@ void InsertStudent(){
     fclose(filePtr);
 
     // Updating lastId
-    SetLastId(STUDENTTABLE, newStudent.id)
+    SetLastId(STUDENTTABLE, newStudent.id);
     
     // Returning the new student data
     printf("(New Student)\nId:\t%d\nName:\t%s\nAge:\t%d", newStudent.id, newStudent.name, newStudent.age);
