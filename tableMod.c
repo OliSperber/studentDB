@@ -37,10 +37,26 @@ int LastIdFromTable(const char table[])
 void SetLastId(const char table[], int id)
 {
     FILE *tablePtr = fopen(table, "w");
+    FILE *tableTemp = fopen("tempTable.txt", "w");
 
-    fprintf(tablePtr, "%d", id);
+    fprintf(tableTemp, "%d\n", id);
+
+    // To skip the first line
+    char buffer[256];
+    fgets(buffer, sizeof(buffer), tablePtr);
+
+    char tableContent[100];
+
+    while (fgets(tableContent, 100, tablePtr))
+    {
+        fprintf(tableTemp, "%s", tableContent);
+    }
 
     fclose(tablePtr);
+    fclose(tableTemp);
+
+    remove(table);
+    rename("tempTable.txt", table);
 }
 
 bool AskWhatTable()
