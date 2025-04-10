@@ -22,7 +22,7 @@ void InsertStudent(){
     }
 
     // inserting Data into Table
-    fprintf(filePtr, "%d %s %d %f", newStudent.id, newStudent.name, newStudent.age, 0.0);
+    fprintf(filePtr, "%d %s %d %f\n", newStudent.id, newStudent.name, newStudent.age, 0.0);
     fclose(filePtr);
 
     // Updating lastId
@@ -35,7 +35,6 @@ void InsertStudent(){
 
 void UpdateStudent(){
 
-    int IdToDelete;
     student s;
     student sInput;
 
@@ -70,6 +69,38 @@ void UpdateStudent(){
     remove(STUDENTTABLE);
     rename("tempFile.txt", STUDENTTABLE);
 }
+
+void UpdateStudentGrade(int studentId, float newGradeAvg){
+    student s;
+
+    // Opening table file
+    FILE* filePtr = fopen(STUDENTTABLE, "r");
+    FILE* tempFile = fopen("tempFile.txt", "w");
+    if(!filePtr || !tempFile){
+        perror("error opening file");
+        return;
+    }
+
+    // To skip the first line
+    char buffer[256];
+    fgets(buffer, sizeof(buffer), filePtr);
+    fputs(buffer, tempFile);
+
+    //scanning for student with given id
+    while(fscanf(filePtr, "%d %s %d %f", &s.id, s.name, &s.age, &s.gradeAvg) == 4){
+        if(s.id != studentId)
+            fprintf(tempFile, "%d %s %d %f\n", s.id, s.name, s.age, s.gradeAvg);
+        else
+            fprintf(tempFile, "%d %s %d %f\n", s.id, s.name, s.age, newGradeAvg);
+    }
+    
+    fclose(filePtr);
+    fclose(tempFile);
+
+    remove(STUDENTTABLE);
+    rename("tempFile.txt", STUDENTTABLE);
+}
+
 
 void GetStudent(){
     int id;

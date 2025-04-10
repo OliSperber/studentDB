@@ -10,9 +10,11 @@ typedef struct Grade
 
 
 // All methods to modidy and read grade table
-void InsertGrade(int studentId, float gradeId);
-void DeleteGrade(int gradeId);
-grade GetGrade(int gradeId);
-grade *GetAllGrades(int size);
+void InsertGrade();
+void DeleteGrade();
+void GetGrade();
+void GetGradeOfStudent();
+void GetAllGrades();
+float GetAvgGrade(int studentId);
 
 #endif

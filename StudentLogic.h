@@ -14,6 +14,7 @@ typedef struct Student
 
 void InsertStudent();
 void UpdateStudent();
+void UpdateStudentGrade(int studentId, float newGradeAvg);
 void GetStudent();
 void DeleteStudent();
 void GetAllStudents();
