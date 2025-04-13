@@ -22,8 +22,9 @@ int LastIdFromTable(const char table[])
     FILE *tablePtr = fopen(table, "r");
 
     int lastId = -1;
-    while (fscanf(tablePtr, "%d", lastId) == 1)
-        fclose(tablePtr);
+    fscanf(tablePtr, "%d", &lastId); 
+
+    fclose(tablePtr);
 
     if (lastId == -1)
     {
@@ -36,8 +37,12 @@ int LastIdFromTable(const char table[])
 
 void SetLastId(const char table[], int id)
 {
-    FILE *tablePtr = fopen(table, "w");
+    FILE *tablePtr = fopen(table, "r");
     FILE *tableTemp = fopen("tempTable.txt", "w");
+    if (!tablePtr || !tableTemp) {
+        printf("error opening files");
+        return;
+    }
 
     fprintf(tableTemp, "%d\n", id);
 
@@ -47,9 +52,9 @@ void SetLastId(const char table[], int id)
 
     char tableContent[100];
 
-    while (fgets(tableContent, 100, tablePtr))
+    while (fgets(tableContent, sizeof(tableContent), tablePtr))
     {
-        fprintf(tableTemp, "%s", tableContent);
+       fputs(tableContent, tableTemp);
     }
 
     fclose(tablePtr);

@@ -11,7 +11,7 @@ void InsertStudent(){
     };
 
     // Asking for student Data
-    printf("Enter student data:\n<Name> <Age>");
+    printf("Enter student data:\n<Name> <Age>\n");
     scanf("%s %d", newStudent.name, &newStudent.age);
 
     // Opening table file
@@ -39,8 +39,8 @@ void UpdateStudent(){
     student sInput;
 
     // Asking for student Data
-    printf("Enter student data:\n<Name> <Age>");
-    scanf("%d, %s %d", &sInput.id, sInput.name, &sInput.age);
+    printf("Enter student data:\n<Id> <Name> <Age>\n");
+    scanf("%d %s %d", &sInput.id, sInput.name, &sInput.age);
 
     // Opening table file
     FILE* filePtr = fopen(STUDENTTABLE, "r");
@@ -107,7 +107,7 @@ void GetStudent(){
     student studentSearch;
 
     // Asking for student Id
-    printf("Enter student Id:\n<Id>");
+    printf("Enter student Id:\n<Id>\n");
     scanf("%d", &id);
 
     // Opening table file
@@ -140,7 +140,7 @@ void DeleteStudent(){
     student s;
 
     // Asking for student Id
-    printf("Enter student Id:\n<Id>");
+    printf("Enter student Id:\n<Id>\n");
     scanf("%d", &IdToDelete);
 
     // Opening table file
