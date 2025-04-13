@@ -163,12 +163,13 @@ float GetAvgGrade(int studentId){
         printf("Error opening file");
         return 0.0;
     }
+
     // To skip the first line
     char buffer[256];
     fgets(buffer, sizeof(buffer), filePtr);
 
     while(fscanf(filePtr, "%d %f %d", &g.id, &g.grade, &g.studentId) == 3){
-        if(g.id == studentId){
+        if(g.studentId == studentId){
             amountOfGrades++;
             totalGrade += g.grade;
         }
